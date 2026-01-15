@@ -3,176 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TreeSense | Intelligent Agriculture Compliance</title>
+    <title>TreeSense | The Future is Green & Digital</title>
     <style>
         :root {
-            --primary: #2E7D32;
-            --accent: #81C784;
-            --text: #2C3E50;
-            --light-bg: #F8F9FA;
-            --white: #FFFFFF;
-            --border: #E0E0E0;
+            /* Dark Mode Palette */
+            --bg-dark: #0B1120;       /* Very dark blue/slate */
+            --bg-card: #1E293B;       /* Lighter slate for cards */
+            --primary: #4ADE80;       /* Neon Agri Green */
+            --primary-glow: rgba(74, 222, 128, 0.4);
+            --accent: #38BDF8;        /* Sky Blue for Tech/Data */
+            --text-main: #F8FAFC;     /* Off-white */
+            --text-muted: #94A3B8;    /* Muted gray */
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            color: var(--text);
-            background-color: var(--white);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* Minimal Utility Classes */
+        /* Utility Classes */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
         h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
             text-align: center;
-            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
         }
 
         p.subtitle {
             text-align: center;
-            color: #666;
+            color: var(--text-muted);
             margin-bottom: 4rem;
-            max-width: 600px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1.1rem;
         }
 
-        /* 1. HERO SECTION (Minimal) */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary), #22c55e);
+            color: #000;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        /* 1. HERO SECTION */
         .hero {
-            height: 85vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1625246333195-58197bd47d26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
+            height: 90vh;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--white);
+            background: 
+                linear-gradient(to bottom, rgba(11, 17, 32, 0.8), var(--bg-dark)),
+                url('https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); /* Dark Agri Tech Image */
+            background-size: cover;
+            background-position: center;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: -1px;
+            font-size: 4rem;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
+            font-weight: 800;
         }
 
-        .btn {
-            background-color: var(--white);
-            color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .btn:hover {
-            background-color: var(--primary);
+        /* 2. VISION & MISSION (Glassmorphism) */
+        .vm-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        /* Decorative Blur Blob */
+        .blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .blob-left { top: 0; left: -100px; }
+        .blob-right { bottom: 0; right: -100px; background: var(--accent); }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vm-card {
+            background: rgba(30, 41, 59, 0.4); /* Glass */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .vm-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .vm-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .vm-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             color: var(--white);
         }
 
-        /* 2. ABOUT & USP (Grid) */
-        .section-padding {
-            padding: 80px 0;
+        .vm-card p {
+            color: var(--text-muted);
+        }
+
+        /* 3. USP SECTION (Grid) */
+        .usp-section {
+            padding: 100px 0;
         }
 
         .usp-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
         }
 
         .usp-item {
-            padding: 20px;
-            border-left: 3px solid var(--primary);
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .usp-item:hover {
+            background: linear-gradient(145deg, var(--bg-card), rgba(74, 222, 128, 0.05));
+            border-color: var(--primary);
         }
 
         .usp-item h3 {
-            font-size: 1.2rem;
+            color: var(--primary);
             margin-bottom: 10px;
+            font-size: 1.3rem;
         }
 
-        /* 3. WORKFLOW PROCESS (Timeline Style) */
+        /* 4. WORKFLOW (Neon Timeline) */
         .process-section {
-            background-color: var(--light-bg);
+            padding: 100px 0;
+            background: #0f172a;
         }
 
-        .process-steps {
+        .process-container {
             display: flex;
             justify-content: space-between;
             position: relative;
-            margin-top: 3rem;
+            margin-top: 60px;
         }
 
         /* Connecting Line */
-        .process-steps::before {
+        .process-container::before {
             content: '';
             position: absolute;
             top: 40px;
             left: 50px;
             right: 50px;
             height: 2px;
-            background: #ddd;
+            background: linear-gradient(90deg, var(--bg-card), var(--primary), var(--bg-card));
             z-index: 0;
+            opacity: 0.3;
         }
 
         .step-card {
-            background: var(--white);
             width: 22%;
-            padding: 2rem 1rem;
-            border-radius: 8px;
-            text-align: center;
             position: relative;
             z-index: 1;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
+            text-align: center;
         }
 
         .step-icon {
             width: 80px;
             height: 80px;
-            background: var(--primary);
-            color: white;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            color: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 20px;
             font-size: 1.5rem;
-            border: 5px solid var(--white);
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+            transition: 0.3s;
+        }
+
+        .step-card:hover .step-icon {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 25px var(--primary);
         }
 
         .step-card h4 {
-            margin-bottom: 1rem;
-            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
         .step-card p {
             font-size: 0.9rem;
-            color: #777;
+            color: var(--text-muted);
         }
 
-        /* 4. REVENUE MODEL (Pricing) */
+        /* 5. PRICING (High Contrast) */
+        .pricing-section {
+            padding: 100px 0;
+        }
+
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -181,89 +280,85 @@
         }
 
         .price-card {
-            background: var(--white);
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            transition: 0.3s;
+            position: relative;
         }
 
         .price-card.featured {
             border: 2px solid var(--primary);
+            background: radial-gradient(circle at top, rgba(74, 222, 128, 0.05), var(--bg-card));
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.1);
+            z-index: 2;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
         }
 
-        .plan-name {
-            font-size: 1.1rem;
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: bold;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
         }
 
         .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin: 10px 0;
         }
-
+        
         .price span {
             font-size: 1rem;
-            color: #999;
+            color: var(--text-muted);
             font-weight: 400;
-        }
-
-        .target-audience {
-            background: #f0f0f0;
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-bottom: 2rem;
         }
 
         .features-list {
             list-style: none;
             text-align: left;
-            margin-bottom: 2rem;
+            margin: 30px 0;
+            color: var(--text-muted);
         }
 
         .features-list li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
         }
 
         .features-list li::before {
             content: '✓';
             color: var(--primary);
-            position: absolute;
-            left: 0;
+            margin-right: 10px;
             font-weight: bold;
         }
 
         /* Footer */
         footer {
-            background: #1a1a1a;
-            color: #888;
-            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
             text-align: center;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        /* Media Queries */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .process-steps { flex-direction: column; }
-            .process-steps::before { display: none; }
-            .step-card { width: 100%; margin-bottom: 2rem; }
-            .pricing-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.5rem; }
-            .price-card.featured { transform: none; }
+            .vm-grid, .process-container, .pricing-grid { grid-template-columns: 1fr; }
+            .process-container { flex-direction: column; gap: 40px; }
+            .process-container::before { display: none; }
+            .step-card { width: 100%; }
+            .price-card.featured { transform: scale(1); }
         }
     </style>
 </head>
@@ -271,119 +366,137 @@
 
     <header class="hero">
         <div class="container">
-            <h1>Compliance Simplified.</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                TreeSense by IntraSensors: Turning the 2026 Regulatory Storm into a competitive advantage for European SMEs.
-            </p>
-            <a href="#process" class="btn">See How It Works</a>
+            <h1>Compliance is <span class="text-gradient">Automated</span>.<br>Farming is <span class="text-gradient">Smart</span>.</h1>
+            <p>TreeSense transforms the 2026 Regulatory Storm into a competitive advantage. Zero hardware. 100% Digital. Powered by IntraSensors.</p>
+            <a href="#workflow" class="btn">Start Your Digital Transition</a>
         </div>
     </header>
 
-    <section class="section-padding container">
-        <h2>Why TreeSense?</h2>
-        <p class="subtitle">Powered by 15 years of IntraSensors' pharmaceutical precision.</p>
-        
-        <div class="usp-grid">
-            <div class="usp-item">
-                <h3>Zero-Hardware</h3>
-                <p>No expensive IoT sensors. [cite_start]We use smartphone cameras and Sentinel-2 satellite data[cite: 69].</p>
-            </div>
-            <div class="usp-item">
-                <h3>NCC Engine Core</h3>
-                [cite_start]<p>Proprietary AI achieving 93% accuracy in real-world conditions (dust/shadows) vs. competitors' 70%[cite: 47, 71].</p>
-            </div>
-            <div class="usp-item">
-                <h3>Real-Time Compliance</h3>
-                [cite_start]<p>One-tap logging of pesticides (MAPP/EPPO) ensuring full 2026 EU regulatory adherence[cite: 72].</p>
-            </div>
-            <div class="usp-item">
-                <h3>CAP Protection</h3>
-                [cite_start]<p>Automated reporting secures vital Common Agricultural Policy subsidies for farmers[cite: 15].</p>
+    <section class="vm-section">
+        <div class="blob blob-left"></div>
+        <div class="blob blob-right"></div>
+        <div class="container">
+            <div class="vm-grid">
+                <div class="vm-card">
+                    <span class="vm-icon">👁️</span>
+                    [cite_start]<h3>Our Vision [cite: 3, 7]</h3>
+                    <p>To create a European agricultural ecosystem where <strong>regulatory bureaucracy becomes a competitive edge</strong>. We envision a future where every small family farm (SME) operates with the same data precision as a pharmaceutical lab, ensuring sustainability and profitability in the digital age.</p>
+                </div>
+                <div class="vm-card">
+                    <span class="vm-icon">🚀</span>
+                    [cite_start]<h3>Our Mission [cite: 4, 119]</h3>
+                    <p>To <strong>democratize precision agriculture</strong> by eliminating hardware barriers. We are bridging the gap between the lab and the field by turning the farmer's smartphone into a scientific instrument, ensuring no grower is left behind by the 2026 mandates.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="process" class="section-padding process-section">
+    <section class="usp-section">
         <div class="container">
-            <h2>Workflow</h2>
-            <p class="subtitle">From field to compliant file in 4 simple steps.</p>
+            <h2>Why <span class="text-gradient">TreeSense</span>?</h2>
+            <p class="subtitle">The only platform powered by 15 years of IntraSensors' R&D.</p>
+            
+            <div class="usp-grid">
+                <div class="usp-item">
+                    [cite_start]<h3>📵 Zero-Hardware [cite: 69]</h3>
+                    <p>Forget expensive sensors. We leverage the camera you already own and fuse it with free Sentinel-2 satellite data.</p>
+                </div>
+                <div class="usp-item">
+                    [cite_start]<h3>🧠 NCC AI Core [cite: 47, 49]</h3>
+                    <p>Our proprietary engine delivers <strong>93% accuracy</strong> in dusty, real-world conditions where standard AI fails.</p>
+                </div>
+                <div class="usp-item">
+                    [cite_start]<h3>⚡ Real-Time Logs [cite: 72]</h3>
+                    <p>One-tap logging of MAPP/EPPO codes. We generate the exact PDF/CSV files inspectors demand.</p>
+                </div>
+                <div class="usp-item">
+                    [cite_start]<h3>🛡️ CAP Protection [cite: 15]</h3>
+                    <p>Avoid penalties. Our automated reporting safeguards your essential EU subsidies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="process-steps">
+    <section id="workflow" class="process-section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p class="subtitle">From pocket to policy in 4 steps.</p>
+
+            <div class="process-container">
                 <div class="step-card">
                     <div class="step-icon">1</div>
-                    <h4>Register & Map</h4>
-                    [cite_start]<p>Farmer registers and defines farm borders using GPS polygons via smartphone[cite: 27].</p>
+                    [cite_start]<h4>Register [cite: 27]</h4>
+                    <p>Define your land using GPS polygons. Instant EUDR compliance check.</p>
                 </div>
-                
                 <div class="step-card">
                     <div class="step-icon">2</div>
-                    <h4>Capture</h4>
-                    [cite_start]<p>User takes photos or video of the crop/pest using the mobile app[cite: 69].</p>
+                    [cite_start]<h4>Capture [cite: 69]</h4>
+                    <p>Snap a photo of the crop or pest using the mobile app.</p>
                 </div>
-
                 <div class="step-card">
                     <div class="step-icon">3</div>
-                    <h4>AI Analysis</h4>
-                    [cite_start]<p>NCC Engine processes images & integrates satellite data for pest ID and health checks[cite: 30].</p>
+                    [cite_start]<h4>Analyze [cite: 43]</h4>
+                    <p>NCC Engine identifies the pest & Satellite checks vigor (NDVI).</p>
                 </div>
-
                 <div class="step-card">
                     <div class="step-icon">4</div>
-                    <h4>CAP Output</h4>
-                    [cite_start]<p>System generates treatment plans and official PDF/CSV files for EU inspection[cite: 33].</p>
+                    [cite_start]<h4>Comply [cite: 33]</h4>
+                    <p>Download the official CAP-compliant report instantly.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding container">
-        <h2>Revenue Model</h2>
-        <p class="subtitle">Transparent pricing designed for SME scalability.</p>
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Transparent Pricing</h2>
+            <p class="subtitle">Scalable models for every farm size.</p>
 
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="plan-name">Freemium</div>
-                <div class="price">€0<span>/mo</span></div>
-                <div class="target-audience">Data Entry Level</div>
-                <ul class="features-list">
-                    <li>3 Image Analyses/Month</li>
-                    <li>Basic Pest Identification</li>
-                    <li>Regulatory Reporting (Basic)</li>
-                    [cite_start]<li><strong>Goal:</strong> User Acquisition [cite: 90]</li>
-                </ul>
-            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Freemium</h3>
+                    <div class="price">€0<span>/mo</span></div>
+                    [cite_start]<p style="color:var(--text-muted)">Entry Level [cite: 90]</p>
+                    <ul class="features-list">
+                        <li>3 AI Analyses/Month</li>
+                        <li>Basic Pest ID</li>
+                        <li>1 Field Registration</li>
+                    </ul>
+                </div>
 
-            <div class="price-card featured">
-                <div class="plan-name">Growth</div>
-                <div class="price">€100<span>/mo</span></div>
-                <div class="target-audience">Farms < 10 Hectares</div>
-                <ul class="features-list">
-                    <li><strong>Unlimited</strong> Analyses</li>
-                    <li>Full CAP Compliance Auto-Docs</li>
-                    <li>Treatment Formulas & Plans</li>
-                    [cite_start]<li>5 Expert Consultations [cite: 91]</li>
-                </ul>
-                <a href="#" class="btn" style="background:var(--primary); color:white; font-size:0.9rem;">Start Free Trial</a>
-            </div>
+                <div class="price-card featured">
+                    <div class="badge">BEST VALUE</div>
+                    <h3>Growth</h3>
+                    <div class="price">€100<span>/mo</span></div>
+                    [cite_start]<p style="color:var(--text-muted)"> < 10 Hectares [cite: 90]</p>
+                    <ul class="features-list">
+                        <li><strong>Unlimited</strong> Analysis</li>
+                        <li>Full Compliance Auto-Docs</li>
+                        <li>Treatment Plans</li>
+                        <li>5 Expert Consultations</li>
+                    </ul>
+                    <a href="#" class="btn" style="width:100%">Get Started</a>
+                </div>
 
-            <div class="price-card">
-                <div class="plan-name">Elite</div>
-                <div class="price">€115<span>/mo</span></div>
-                <div class="target-audience">Farms > 50 Hectares</div>
-                <ul class="features-list">
-                    <li>Multi-Land Management</li>
-                    <li>VRT Machinery Integration</li>
-                    <li>Soil NPK Analysis Integration</li>
-                    [cite_start]<li>Blockchain Traceability [cite: 92]</li>
-                </ul>
+                <div class="price-card">
+                    <h3>Elite</h3>
+                    <div class="price">€115<span>/mo</span></div>
+                    [cite_start]<p style="color:var(--text-muted)"> > 50 Hectares [cite: 92]</p>
+                    <ul class="features-list">
+                        <li>Multi-Land Mgmt</li>
+                        <li>VRT Integration</li>
+                        <li>Soil NPK Analysis</li>
+                        <li>Blockchain Traceability</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p><strong>TreeSense</strong> is a product of IntraSensors Belgium.</p>
-            <p style="opacity: 0.6; margin-top: 10px;">Helping European farmers secure their future since 2025.</p>
+            <p><strong>TreeSense</strong> © 2026 | Powered by IntraSensors Belgium.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Designed for the Future of European Agriculture.</p>
         </div>
     </footer>
 
