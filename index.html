@@ -1,694 +1,429 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK Agriculture & Agri-Tech Strategic Report 2025 (AI Enhanced)</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Markdown Parser -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ukBlue: '#1e3a8a', // Royal Blue
-                        ukRed: '#dc2626',   // Signal Red
-                        agriGreen: '#15803d', // Crop Green
-                        vinePurple: '#701a75', // Grape/Wine
-                        techCyan: '#0891b2', // Technology
-                        geminiPurple: '#8E24AA', // AI Accent
-                        soilBrown: '#78350f',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'blob': 'blob 7s infinite',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>TreeSense | Smart Agriculture Platform</title>
     <style>
-        /* Responsive Chart Container */
-        .chart-container {
-            position: relative;
+        :root {
+            --primary: #2E7D32; /* Green */
+            --secondary: #1565C0; /* Blue for Tech/Data */
+            --dark: #1B1B1B;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --accent: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--white);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
             width: 100%;
-            max-width: 700px;
-            height: 350px;
-            margin: 0 auto;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        @media (min-width: 768px) {
-            .chart-container { height: 400px; }
-        }
-        
-        /* Markdown Styles for AI Output */
-        .prose p { margin-bottom: 0.75em; line-height: 1.6; }
-        .prose strong { color: #1e3a8a; font-weight: 700; }
-        .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
-        .prose h3 { font-size: 1.1em; font-weight: bold; margin-top: 1em; color: #701a75; }
-        .prose blockquote { border-right: 4px solid #8E24AA; padding-right: 1em; color: #555; font-style: italic; background: #f9f9f9; padding: 0.5em; border-radius: 4px; }
-        
-        /* Smooth Scroll */
-        html { scroll-behavior: smooth; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1B5E20;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1625246333195-58197bd47d26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 10%;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        /* The Problem / Regulatory Storm */
+        .problem-section {
+            background-color: var(--light);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* The Solution (4 Pillars) */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pillar-card {
+            text-align: center;
+            border: 1px solid #eee;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .pillar-card h3 {
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* Technology / NCC */
+        .tech-section {
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        .tech-section h2 {
+            color: var(--white);
+        }
+
+        .tech-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .tech-text {
+            flex: 1;
+        }
+
+        .tech-stat {
+            flex: 1;
+            text-align: center;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        /* Market & Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .price-card {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .price-card.featured {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(46, 125, 50, 0.2);
+            position: relative;
+        }
+
+        .price-card.featured::before {
+            content: 'Recommended';
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        ul.features {
+            list-style: none;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        ul.features li {
+            margin-bottom: 0.5rem;
+        }
+
+        ul.features li::before {
+            content: '✓';
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 2rem 10%;
+            text-align: center;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            nav { padding: 1rem; }
+            .nav-links { display: none; } /* Simplified for demo */
+        }
     </style>
-    <!-- NO SVG / NO Mermaid -->
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed relative selection:bg-ukBlue selection:text-white">
+<body>
 
-    <!-- HERO SECTION -->
-    <header class="relative bg-gradient-to-br from-ukBlue via-slate-900 to-slate-900 text-white overflow-hidden pb-20 pt-24 px-6 border-b-8 border-ukRed">
-        <!-- Animated Background Blobs -->
-        <div class="absolute top-0 left-0 w-96 h-96 bg-ukBlue/40 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-vinePurple/40 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+    <nav>
+        <div class="logo">Tree<span>Sense</span></div>
+        <div class="nav-links">
+            <a href="#vision">Vision</a>
+            <a href="#problem">The Challenge</a>
+            <a href="#solution">Solution</a>
+            <a href="#tech">Technology</a>
+            <a href="#pricing">Business Model</a>
+        </div>
+        <a href="#" class="btn">Get Demo</a>
+    </nav>
 
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <!-- AI Badge -->
-            
-            
-            <h1 class="text-4xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
-                UK Agriculture <span class="text-transparent bg-clip-text bg-gradient-to-r from-agriGreen to-techCyan">& Agri-Tech</span>
-            </h1>
-            <h2 class="text-xl md:text-2xl font-light text-slate-200 mb-8">Strategic Status Report 2024-2025</h2>
-            
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                An interactive analysis of the "Profit Paradox", the Arable Crisis, Viticulture volatility, and the "Valley of Death" in Agri-Tech.
-            </p>
-
-            <!-- AI Action Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="generateIntro()" class="group relative px-8 py-4 bg-geminiPurple hover:bg-purple-700 rounded-full font-bold shadow-2xl transition-all hover:scale-105 flex items-center justify-center gap-2 overflow-hidden ring-4 ring-purple-900/20">
-                    <span class="relative z-10 text-lg">📄 Generate Persian Briefing</span>
-                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </button>
-                <button onclick="scrollToCharts()" class="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/30 rounded-full font-semibold backdrop-blur-sm transition-all text-lg">
-                    View Data Visualizations ▼
-                </button>
-            </div>
-
-            <!-- AI Intro Output Area -->
-            <div id="intro-output" class="hidden mt-12 max-w-4xl mx-auto bg-white/95 text-slate-800 p-8 rounded-2xl shadow-2xl text-right text-sm md:text-base leading-relaxed prose prose-slate border-t-4 border-geminiPurple" dir="rtl">
-                <!-- AI Content will load here -->
-            </div>
+    <header>
+        <div>
+            <h1>Agriculture, Simplified.</h1>
+            <p>Digital Transformation & Compliance for European SMEs. Turning the 2026 Regulatory Storm into a Competitive Advantage.</p>
+            <a href="#vision" class="btn" style="font-size: 1.2rem; padding: 1rem 2rem;">Explore The Platform</a>
         </div>
     </header>
 
-    <main id="main-content" class="max-w-7xl mx-auto px-4 py-12 space-y-24">
+    <section id="vision">
+        <h2>From Pharma to Farm</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
+            Powered by <strong>IntraSensors Belgium</strong>, TreeSense leverages 15 years of pharmaceutical sensor research to bring precision, sustainability, and data integrity to agriculture. We empower the 60% of European land managed by SMEs.
+        </p>
+    </section>
 
-        <!-- SECTION 1: FINANCIALS -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="p-3 bg-ukBlue rounded-lg text-white font-bold text-xl">£</div>
-                    <h2 class="text-3xl font-bold text-slate-900">Financial Paradox</h2>
-                </div>
-                <p class="text-slate-600 mb-6 text-lg leading-relaxed text-justify">
-                    2024 shows a misleading statistical recovery. While <strong>Total Income from Farming (TIFF)</strong> surged to <strong>£7.7bn</strong> (+26.4%), this was purely driven by falling input costs (fertilizers/feed) and livestock prices. The core productivity of the sector actually <strong>declined by 1.4%</strong>, revealing structural fragility.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-agriGreen hover:shadow-xl transition-shadow">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Total Income (TIFF)</div>
-                        <div class="text-4xl font-black text-slate-900 mt-2">£7.7bn</div>
-                        <div class="text-green-600 font-bold text-sm mt-1 flex items-center gap-1">
-                            <span>▲</span> 26.4% Increase
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-ukRed hover:shadow-xl transition-shadow">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Productivity (TFP)</div>
-                        <div class="text-4xl font-black text-slate-900 mt-2">-1.4%</div>
-                        <div class="text-red-600 font-bold text-sm mt-1 flex items-center gap-1">
-                            <span>▼</span> Efficiency Drop
-                        </div>
-                    </div>
-                </div>
+    <section id="problem" class="problem-section">
+        <h2>The 2026 Regulatory Storm</h2>
+        <div class="problem-grid">
+            <div class="card">
+                <div class="card-icon">📜</div>
+                <h3>Strict Compliance</h3>
+                <p>By Jan 1, 2026 (Reg 2023/564), all professional users must maintain machine-readable electronic records. No more paper notebooks.</p>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 relative group">
-                <button onclick="triggerQuickInsight('financials')" class="absolute top-4 right-4 text-geminiPurple opacity-0 group-hover:opacity-100 transition-opacity bg-purple-50 px-3 py-1 rounded-full text-xs font-bold">✨ Ask AI</button>
-                <div class="chart-container">
-                    <canvas id="financialChart"></canvas>
-                </div>
+            <div class="card">
+                <div class="card-icon">👴</div>
+                <h3>Demographic Crisis</h3>
+                <p>The average EU farmer is 57 years old. Complex digital tools create a barrier, risking non-compliance and loss of CAP subsidies.</p>
             </div>
-        </section>
-
-        <!-- SECTION 2: ARABLE CRISIS -->
-        <section class="bg-slate-50 p-8 lg:p-12 rounded-3xl border border-slate-200 relative overflow-hidden">
-            <!-- Background Decoration -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-100 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl opacity-50"></div>
-            
-            <div class="relative z-10">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="p-3 bg-amber-500 rounded-lg text-white text-xl">🌾</div>
-                    <h2 class="text-3xl font-bold text-slate-900">The "Wet Winter" Arable Crisis</h2>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div class="space-y-6">
-                        <p class="text-slate-600 text-lg leading-relaxed">
-                            Historic rainfall prevented winter drilling, forcing a desperate switch to Spring crops. <strong>Wheat production collapsed by 2.9 million tonnes</strong> (-26.9% value). Even more critically, Oilseed Rape (OSR) is facing extinction due to the neonicotinoid ban and Flea Beetle pressure.
-                        </p>
-                        <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="grid grid-cols-3 divide-x divide-slate-100">
-                                <div class="p-4 text-center">
-                                    <div class="text-xs text-slate-500 font-bold uppercase">Wheat Value</div>
-                                    <div class="text-xl font-black text-ukRed mt-1">-£722m</div>
-                                </div>
-                                <div class="p-4 text-center">
-                                    <div class="text-xs text-slate-500 font-bold uppercase">OSR Area</div>
-                                    <div class="text-xl font-black text-ukRed mt-1">-32%</div>
-                                </div>
-                                <div class="p-4 text-center">
-                                    <div class="text-xs text-slate-500 font-bold uppercase">Spring Barley</div>
-                                    <div class="text-xl font-black text-agriGreen mt-1">+1.0m T</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="prose text-sm text-slate-500">
-                            <blockquote>
-                                "Farmers are abandoning high-risk crops like OSR for lower-yielding but safer Spring Barley." - AHDB Report 2025
-                            </blockquote>
-                        </div>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                        <div class="chart-container">
-                            <canvas id="cropChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: VITICULTURE -->
-        <section class="bg-gradient-to-br from-vinePurple to-slate-900 text-white p-8 lg:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-            <!-- Decorative Elements -->
-            <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
-            <div class="absolute top-10 right-10 w-32 h-32 bg-pink-500 rounded-full blur-3xl opacity-20 animate-pulse-slow"></div>
-            
-            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-1 space-y-6">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">🍇</span>
-                        <h2 class="text-3xl font-bold text-white">Viticulture: Boom & Bust</h2>
-                    </div>
-                    <p class="text-purple-100 text-sm leading-relaxed text-justify">
-                        The UK wine sector is the fastest growing agricultural sector (+74% acreage in 10 years). However, volatility is extreme. After a record-breaking 2023, the 2024 vintage crashed due to wet weather and Downy Mildew.
-                    </p>
-                    
-                    <div class="space-y-3">
-                        <div class="p-4 bg-white/10 rounded-xl backdrop-blur-md border border-white/10 flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-pink-300 text-xs uppercase">2023 Record Yield</h4>
-                                <span class="text-2xl font-bold">21.6m</span> <span class="text-xs opacity-70">Bottles</span>
-                            </div>
-                            <span class="text-2xl">🏆</span>
-                        </div>
-                        <div class="p-4 bg-red-900/40 rounded-xl backdrop-blur-md border border-red-500/30 flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-red-300 text-xs uppercase">2024 Washout</h4>
-                                <span class="text-2xl font-bold">~7.0m</span> <span class="text-xs opacity-70">Bottles</span>
-                            </div>
-                            <span class="text-2xl">🌧️</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-2">
-                    <div class="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/5">
-                        <div class="chart-container">
-                            <canvas id="wineChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: PEST MANAGEMENT -->
-        <section>
-            <div class="flex items-center gap-4 mb-8">
-                <div class="p-3 bg-soilBrown rounded-lg text-white text-xl">🐞</div>
-                <h2 class="text-3xl font-bold text-slate-900">Strategic Pest Management (Top 10)</h2>
-            </div>
-            
-            <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-xl">
-                <table class="w-full text-sm text-left text-slate-600">
-                    <thead class="bg-slate-800 text-white uppercase font-bold text-xs tracking-wider">
-                        <tr>
-                            <th class="px-6 py-5">Rank</th>
-                            <th class="px-6 py-5">Crop</th>
-                            <th class="px-6 py-5">Key Pest / Disease</th>
-                            <th class="px-6 py-5">IPM Strategy / Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-200 bg-white">
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">01</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Wheat</td>
-                            <td class="px-6 py-4"><span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">BYDV (Aphids)</span></td>
-                            <td class="px-6 py-4">Delayed drilling; Resistant varieties (Wolverine).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">02</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Barley</td>
-                            <td class="px-6 py-4">Rhynchosporium</td>
-                            <td class="px-6 py-4">Fungicide programs; Clean seed usage.</td>
-                        </tr>
-                        <tr class="hover:bg-red-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">03</td>
-                            <td class="px-6 py-4 font-bold text-ukRed">Oilseed Rape</td>
-                            <td class="px-6 py-4"><span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-bold">Flea Beetle</span></td>
-                            <td class="px-6 py-4 font-semibold text-red-600">Crisis: No chemical control available.</td>
-                        </tr>
-                        <tr class="hover:bg-purple-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">04</td>
-                            <td class="px-6 py-4 font-bold text-vinePurple">Grapes</td>
-                            <td class="px-6 py-4">Downy Mildew & SWD</td>
-                            <td class="px-6 py-4">Canopy management; Bio-controls for soft fruit.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">05</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Potatoes</td>
-                            <td class="px-6 py-4">Cyst Nematode (PCN)</td>
-                            <td class="px-6 py-4">Long rotations (1 in 7 years); Bio-fumigation.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">06</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Sugar Beet</td>
-                            <td class="px-6 py-4">Virus Yellows</td>
-                            <td class="px-6 py-4">Emergency Neonicotinoid derogations (Temporary).</td>
-                        </tr>
-                         <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">07</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Strawberries</td>
-                            <td class="px-6 py-4">Spider Mites</td>
-                            <td class="px-6 py-4">Predatory mites in polytunnels.</td>
-                        </tr>
-                         <tr class="hover:bg-slate-50 transition-colors">
-                            <td class="px-6 py-4 font-bold text-slate-400">08</td>
-                            <td class="px-6 py-4 font-bold text-ukBlue">Field Veg</td>
-                            <td class="px-6 py-4">Carrot Fly</td>
-                            <td class="px-6 py-4">Physical barriers (Mesh).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- SECTION 5: SUBSIDIES & TECH -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Subsidies -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-ukRed hover:shadow-2xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-xl font-bold text-slate-800">2025 Subsidy "Cliff Edge"</h3>
-                    <span class="bg-red-100 text-red-600 px-2 py-1 rounded text-xs font-bold uppercase">Critical</span>
-                </div>
-                <p class="text-sm text-slate-600 mb-6 text-justify">
-                    Direct payments (BPS) are vanishing. In 2025, any payment amount >£30k is cut by <strong>100%</strong> (Capped). Amounts <£30k are cut by 76%. This is a massive liquidity shock for traditional farms.
-                </p>
-                <div class="chart-container h-56">
-                    <canvas id="subsidyChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Agri-Tech -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-techCyan hover:shadow-2xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-xl font-bold text-slate-800">Agri-Tech: "Valley of Death"</h3>
-                    <span class="bg-cyan-100 text-cyan-600 px-2 py-1 rounded text-xs font-bold uppercase">Innovation</span>
-                </div>
-                <p class="text-sm text-slate-600 mb-6 text-justify">
-                    The market (£12.5bn) is correcting. Hardware startups like <strong>Small Robot Company</strong> failed (liquidation), while ROI-focused robotics like <strong>Muddy Machines</strong> succeed. The "Precision Breeding Act 2023" opens doors for gene-editing.
-                </p>
-                <div class="chart-container h-56">
-                    <canvas id="techChart"></canvas>
-                </div>
-            </div>
-        </section>
-        
-        <!-- SECTION 6: DEMOGRAPHICS -->
-        <section class="bg-slate-100 rounded-2xl p-8 border border-slate-200">
-             <div class="flex items-center gap-4 mb-4">
-                <div class="p-2 bg-slate-400 rounded-lg text-white text-lg">👥</div>
-                <h3 class="text-xl font-bold text-slate-800">The Succession Crisis</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                <div class="md:col-span-1">
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        The average UK farmer is <strong>60 years old</strong>. Less than 5% are under 35. This demographic imbalance slows digital adoption but creates opportunities for new entrants in Agri-Tech.
-                    </p>
-                </div>
-                <div class="md:col-span-2">
-                     <div class="chart-container h-48">
-                        <canvas id="ageChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
-
-    </main>
-
-    <!-- FLOATING CHATBOT -->
-    <div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
-        <!-- Chat Window -->
-        <div id="chat-window" class="hidden flex-col w-80 md:w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-slate-200 mb-4 transform transition-all origin-bottom-right flex">
-            <!-- Header -->
-            <div class="bg-slate-900 text-white p-4 rounded-t-2xl flex justify-between items-center shadow-md">
-                <div class="flex items-center gap-3">
-                    <span class="text-xl bg-white/10 p-1 rounded">🤖</span>
-                    <div>
-                        <h4 class="font-bold text-sm">Agri-Insight (دستیار هوشمند)</h4>
-                        <span class="text-[10px] uppercase tracking-wider text-slate-400">Powered by Gemini</span>
-                    </div>
-                </div>
-                <button onclick="toggleChat()" class="text-slate-400 hover:text-white transition-colors">✕</button>
-            </div>
-            <!-- Messages -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 text-sm" dir="rtl">
-                <div class="flex gap-2 justify-start">
-                    <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tr-none text-slate-700 max-w-[85%] shadow-sm">
-                        سلام! من دستیار هوشمند شما هستم. می‌توانم درباره بازار گندم، نوسانات صنعت شراب یا قوانین جدید انگلستان به زبان فارسی به شما توضیح دهم. سوالی دارید؟
-                    </div>
-                </div>
-            </div>
-            <!-- Input -->
-            <div class="p-3 bg-white border-t border-slate-200 rounded-b-2xl">
-                <div class="relative flex gap-2">
-                    <button onclick="sendChat()" class="p-3 bg-ukBlue text-white rounded-full hover:bg-blue-700 transition-colors shadow-lg">
-                        ➤
-                    </button>
-                    <input type="text" id="chat-input" placeholder="سوال خود را بپرسید..." 
-                           class="w-full pl-4 pr-4 py-2.5 rounded-full border border-slate-300 focus:outline-none focus:border-ukBlue focus:ring-2 focus:ring-ukBlue/20 text-sm text-right bg-slate-50"
-                           onkeypress="handleEnter(event)">
-                </div>
+            <div class="card">
+                <div class="card-icon">💸</div>
+                <h3>Economic Pressure</h3>
+                <p>SMEs cannot afford expensive IoT hardware. They need a cost-effective solution to bridge the digital gap.</p>
             </div>
         </div>
-        
-        <!-- Toggle Button -->
-        <button onclick="toggleChat()" class="bg-geminiPurple hover:bg-purple-700 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 group relative">
-            <span class="text-3xl group-hover:hidden">💬</span>
-            <span class="text-3xl hidden group-hover:block">✨</span>
-            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse border-2 border-white"></span>
-        </button>
-    </div>
+    </section>
 
-    <footer class="bg-slate-950 text-slate-500 py-12 text-center mt-20 border-t border-slate-900">
-        <div class="max-w-4xl mx-auto px-4">
-            <p class="text-xs mb-4">
-                <strong>Data Sources:</strong> Defra (Total Income from Farming 2024), AHDB (Harvest Reports & Early Bird Survey 2025), NFU (Seasonal Workers Scheme), WineGB (Harvest Yield Survey 2024).
-            </p>
-            <p class="text-xs opacity-50">&copy; 2026 UK Strategic Agricultural Analysis Unit. All rights reserved.</p>
+    <section id="solution">
+        <h2>Our 4-Pillar Architecture</h2>
+        <div class="solution-grid">
+            <div class="pillar-card">
+                <div class="card-icon">📱</div>
+                <h3>1. Smart Onboarding</h3>
+                <p>GPS Polygon mapping via smartphone. Full compliance with EUDR (Anti-deforestation) laws.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="card-icon">🛰️</div>
+                <h3>2. Operations Hub</h3>
+                <p>Pesticide Logging & Satellite Monitoring (Sentinel-2). Auto-generation of government inspection files.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="card-icon">⚠️</div>
+                <h3>3. Early Warning</h3>
+                <p>Regional pest migration tracking. Aggregated data protects the entire community.</p>
+            </div>
+            <div class="pillar-card">
+                <div class="card-icon">🔗</div>
+                <h3>4. Multi-Chain SDK</h3>
+                <p>Blockchain integration for full traceability. Connecting soil labs to the supply chain.</p>
+            </div>
         </div>
+    </section>
+
+    <section id="tech" class="tech-section">
+        <h2>The NCC Engine Advantage</h2>
+        <div class="tech-content">
+            <div class="tech-text">
+                <h3>Beyond Standard AI</h3>
+                <p>Standard CNN models drop to 70% accuracy in dusty, real-world farm conditions. TreeSense uses <strong>Normalized Cross-Correlation (NCC)</strong> combined with Vision Transformers.</p>
+                <br>
+                <p>This mathematical approach ensures robust pest detection regardless of lighting, dust, or camera quality.</p>
+                <br>
+                <p><strong>Zero Hardware:</strong> We utilize the farmer's smartphone and free EU satellite data.</p>
+            </div>
+            <div class="tech-stat">
+                <span class="stat-number">93%</span>
+                <p>Accuracy in Real-World Conditions</p>
+                <hr style="margin: 1rem 0; border-color: #555;">
+                <p>vs 70-85% for competitors</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Sustainable Business Model</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Freemium</h3>
+                <div class="price">€0<span>/mo</span></div>
+                <p>Data-for-Service Model</p>
+                <ul class="features">
+                    <li>3 Image Analysis / Month</li>
+                    <li>Basic Regulatory Reporting</li>
+                    <li>1 Field Registration</li>
+                </ul>
+            </div>
+            <div class="price-card featured">
+                <h3>Growth</h3>
+                <div class="price">€100<span>/mo</span></div>
+                <p>For Farms < 10 Hectares</p>
+                <ul class="features">
+                    <li>Unlimited Analysis</li>
+                    <li>Full Compliance Automation</li>
+                    <li>Treatment Plans</li>
+                    <li>5 Expert Consultations</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <h3>Elite</h3>
+                <div class="price">€115<span>/mo</span></div>
+                <p>For Farms > 50 Hectares</p>
+                <ul class="features">
+                    <li>Multi-land Management</li>
+                    <li>VRT Machinery Integration</li>
+                    <li>Soil NPK Analysis</li>
+                    <li>Blockchain Traceability</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>TreeSense by IntraSensors</h3>
+        <p>Vienna, Austria | Brussels, Belgium</p>
+        <p>&copy; 2026 IntraSensors. All Rights Reserved.</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // --- CONFIGURATION ---
-        const apiKey = ""; // INSERT YOUR GOOGLE AI STUDIO API KEY HERE
-        
-        // --- DATA CONTEXT FOR AI ---
-        const reportContext = `
-        REPORT CONTEXT: UK Agriculture Strategy 2024-2025.
-        1. FINANCIALS: TIFF rose to £7.7bn (+26.4%) in 2024 due to lower fertilizer/feed costs. Productivity (TFP) dropped 1.4%.
-        2. ARABLE CRISIS: "Wet Winter" caused Wheat production to drop 2.9m tonnes (-26.9% value). OSR acreage -32% (Flea Beetle crisis). Spring Barley planted as backup (+1.0m tonnes).
-        3. VITICULTURE: Fast growth. 2023 record (21.6m bottles). 2024 crash (6-7m bottles) due to Downy Mildew. Labor cost rising (£12.71/hr).
-        4. SUBSIDIES: BPS 2025 Cliff Edge. Payments >£30k cut 100% (capped). Payments <£30k cut 76%. Shift to SFI (Sustainable Farming Incentive).
-        5. AGRI-TECH: "Valley of Death". Small Robot Company liquidated. Muddy Machines succeeding. Precision Breeding Act 2023 enacted.
-        6. DEMOGRAPHICS: Avg farmer age 60. <5% under 35. Succession crisis.
-        `;
-
-        // --- GEMINI API CALLER ---
-        async function callGemini(prompt, systemInstructionAddon = "") {
-            if (!apiKey) {
-                const mockResponse = "API Key Missing. Please edit the HTML file and insert your Google Gemini API Key in line 430.";
-                alert(mockResponse);
-                return mockResponse;
-            }
-
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            
-            const systemPrompt = `
-                You are a senior agricultural analyst specializing in the UK market. 
-                Use this data context: ${reportContext}.
-                ${systemInstructionAddon}
-                IMPORTANT: The user speaks Persian (Farsi). Always respond in Persian unless explicitly asked to use English.
-                Keep responses professional, concise, and structured (Markdown).
-            `;
-
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
-
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Error: No response from AI.";
-            } catch (error) {
-                console.error(error);
-                return "Connection Error. Please check your internet or API Key.";
-            }
-        }
-
-        // --- AI FEATURES ---
-        
-        async function generateIntro() {
-            const container = document.getElementById('intro-output');
-            container.classList.remove('hidden');
-            container.innerHTML = '<div class="flex justify-center flex-col items-center gap-2"><span class="animate-spin text-geminiPurple text-2xl">⚡</span><span class="text-slate-500 text-sm">...در حال تحلیل داده‌ها و نگارش مقدمه راهبردی</span></div>';
-            
-            const prompt = "Write a comprehensive Executive Briefing (Introduction) for this report in Persian. Summarize the 'Profit Paradox' (High Income but Low Productivity) and the Arable Crisis.";
-            const response = await callGemini(prompt, "Start with 'به نام خدا' or a formal greeting. Use bullet points for key metrics.");
-            
-            container.innerHTML = marked.parse(response);
-        }
-
-        async function generateOutro() {
-            const container = document.getElementById('outro-output');
-            container.classList.remove('hidden');
-            container.innerHTML = '<div class="flex justify-center flex-col items-center gap-2"><span class="animate-spin text-white text-2xl">🤖</span><span class="text-slate-400 text-sm">...در حال جمع‌بندی نهایی و ارائه چشم‌انداز</span></div>';
-            
-            const prompt = "Write a Strategic Conclusion (Outro) in Persian. Focus on the transition from Subsidies to Tech, and the future outlook for 2026.";
-            const response = await callGemini(prompt, "Be visionary and encouraging but realistic. Format clearly.");
-            
-            container.innerHTML = marked.parse(response);
-        }
-        
-        async function triggerQuickInsight(topic) {
-             toggleChat();
-             const input = document.getElementById('chat-input');
-             input.value = "تحلیل وضعیت مالی و سودآوری در سال ۲۰۲۴ چگونه بود؟";
-             sendChat();
-        }
-
-        // --- CHATBOT LOGIC ---
-        function toggleChat() {
-            const win = document.getElementById('chat-window');
-            win.classList.toggle('hidden');
-            if (!win.classList.contains('hidden')) {
-                document.getElementById('chat-input').focus();
-            }
-        }
-
-        function handleEnter(e) { if(e.key === 'Enter') sendChat(); }
-
-        async function sendChat() {
-            const input = document.getElementById('chat-input');
-            const messages = document.getElementById('chat-messages');
-            const text = input.value.trim();
-            if(!text) return;
-
-            // User Msg
-            messages.innerHTML += `<div class="flex gap-2 justify-end animate-blob"><div class="bg-ukBlue text-white p-3 rounded-2xl rounded-tl-none max-w-[85%] shadow-md text-right">${text}</div></div>`;
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-
-            // Loading
-            const loaderId = 'load-' + Date.now();
-            messages.innerHTML += `<div id="${loaderId}" class="flex gap-2 justify-start"><div class="bg-slate-100 p-3 rounded-2xl rounded-tr-none text-slate-500 text-xs italic border border-slate-200">...در حال نوشتن</div></div>`;
-            messages.scrollTop = messages.scrollHeight;
-
-            // AI Msg
-            const response = await callGemini(text, "Answer strictly in Persian.");
-            document.getElementById(loaderId).remove();
-            
-            messages.innerHTML += `<div class="flex gap-2 justify-start"><div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tr-none text-slate-800 max-w-[90%] shadow-sm prose prose-sm leading-6" dir="rtl">${marked.parse(response)}</div></div>`;
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        function scrollToCharts() {
-            document.getElementById('main-content').scrollIntoView();
-        }
-
-        // --- CHARTS (Chart.js) ---
-        // Helper: Wrap labels
-        const wrap = (str) => {
-            if(str.length <= 15) return str;
-            return str.match(/.{1,15}(\s|$)/g) || [str];
-        };
-        
-        const tooltipPlugin = {
-            callbacks: {
-                title: function(tooltipItems) {
-                    const item = tooltipItems[0];
-                    let label = item.chart.data.labels[item.dataIndex];
-                    return Array.isArray(label) ? label.join(' ') : label;
-                }
-            }
-        };
-
-        Chart.defaults.font.family = 'Inter';
-        Chart.defaults.color = '#64748b';
-
-        // 1. Financials
-        new Chart(document.getElementById('financialChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Input Costs', 'Total Income', 'Productivity'].map(wrap),
-                datasets: [{
-                    label: '% Change 2024',
-                    data: [-5.5, 26.4, -1.4],
-                    backgroundColor: ['#10b981', '#1e3a8a', '#dc2626'],
-                    borderRadius: 6
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { legend: {display:false}, tooltip: tooltipPlugin },
-                scales: { y: { grid: { color: '#f1f5f9' } } }
-            }
-        });
-
-        // 2. Crop Crisis
-        new Chart(document.getElementById('cropChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Wheat', 'Winter Barley', 'Spring Barley', 'Oilseed Rape'].map(wrap),
-                datasets: [
-                    { label: '2023 (Mt)', data: [14.0, 3.2, 3.8, 1.2], backgroundColor: '#cbd5e1' },
-                    { label: '2024 (Mt)', data: [11.1, 2.4, 4.8, 0.8], backgroundColor: (ctx) => ctx.dataIndex === 2 ? '#10b981' : '#d97706' }
-                ]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                plugins: { tooltip: tooltipPlugin },
-                scales: { y: { title: { display: true, text: 'Million Tonnes' } } }
-            }
-        });
-
-        // 3. Viticulture
-        new Chart(document.getElementById('wineChart'), {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023', '2024'].map(wrap),
-                datasets: [{
-                    label: 'Bottles (Millions)',
-                    data: [10.5, 8.7, 9.0, 12.2, 21.6, 7.0],
-                    borderColor: '#f472b6',
-                    backgroundColor: 'rgba(244, 114, 182, 0.2)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: '#f472b6'
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                plugins: { 
-                    legend: { labels: { color: '#fff' } },
-                    tooltip: tooltipPlugin
-                },
-                scales: { 
-                    y: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-                    x: { ticks: { color: 'rgba(255,255,255,0.7)' }, grid: { color: 'rgba(255,255,255,0.1)' } }
-                }
-            }
-        });
-
-        // 4. Subsidies
-        new Chart(document.getElementById('subsidyChart'), {
-            type: 'bar',
-            indexAxis: 'y',
-            data: {
-                labels: ['<£30k Payment', '>£30k Payment'].map(wrap),
-                datasets: [{
-                    label: '% Reduction',
-                    data: [76, 100],
-                    backgroundColor: ['#f59e0b', '#dc2626']
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                scales: { x: { max: 100 } },
-                plugins: { tooltip: tooltipPlugin }
-            }
-        });
-
-        // 5. Agri-Tech
-        new Chart(document.getElementById('techChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Smart Farming', 'Precision Ag', 'Robotics'].map(wrap),
-                datasets: [{
-                    data: [55, 30, 15],
-                    backgroundColor: ['#0891b2', '#2563eb', '#64748b']
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { position: 'right', tooltip: tooltipPlugin } 
-            }
-        });
-        
-         // 6. Demographics
-        new Chart(document.getElementById('ageChart'), {
-            type: 'pie',
-            data: {
-                labels: ['Under 35', '35-54', '55-64', 'Over 65'].map(wrap),
-                datasets: [{
-                    data: [5, 27, 30, 38],
-                    backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'right' }, tooltip: tooltipPlugin }
-            }
-        });
-
-    </script>
 </body>
 </html>
